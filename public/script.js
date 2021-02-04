@@ -71,7 +71,7 @@ $(document).ready(function(){
 
   $("#tableoutput").html("<h2 class='ui header'>" + sonatas.title + "</h2>");
 
-  $("#tableoutput").append("<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></thead><tbody>");
+  $("#tableoutput").append("<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></tr></thead><tbody>");
 
   for (let i in sonatas.songs){
         $("#tableoutput tr:last").after("<tr><td>" + sonatas.songs[i].title + "</td><td>" + sonatas.songs[i].artist + "</td></tr>");
