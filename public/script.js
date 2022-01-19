@@ -4,83 +4,106 @@
 // prints "hi" in the browser's dev tools console
 console.log("Hello from the Web App Dev 1 lab!");
 
-function likeIt(){
-  alert('Thanks! You\'re okay too');
-}
+const greenbtn = document.querySelector(".green");
 
-function showHide() {
-  let readMoreDiv = document.getElementById("readmore");
-  readMoreDiv.style.color = "green";
-  if (readMoreDiv.style.display === "block") {
-    readMoreDiv.style.display = "none";
-  } else {
-    readMoreDiv.style.display = "block";
-  }
-}
+greenbtn &&
+  greenbtn.addEventListener("click", () => alert("Thanks! You're okay too"));
 
-function welcomeUser() {
-  let username = prompt("What's your name?");
-  let welcomeUserDiv = document.getElementById("welcomeuser");
-  welcomeUserDiv.style.display = "block";
-  document.getElementById('welcomeuser').innerHTML = '<p> Hello, ' + username + ', looking forward to hearing your playlists! Click this message to close it.</p>';
-  welcomeUserDiv.style.cursor = "pointer";
-}
+const bluebtn = document.querySelector(".blue");
 
-function hideWelcome() {
-  let welcomeUserDiv = document.getElementById("welcomeuser");
-  if (welcomeUserDiv.style.display === "block") {
+bluebtn &&
+  bluebtn.addEventListener("click", () => {
+    let readMoreDiv = document.querySelector("#readmore");
+    readMoreDiv.style.color = "green";
+    if (readMoreDiv.style.display === "block") {
+      readMoreDiv.style.display = "none";
+    } else {
+      readMoreDiv.style.display = "block";
+    }
+  });
+
+const redbtn = document.querySelector(".red");
+
+const welcomeUserDiv = document.querySelector("#welcomeuser");
+
+redbtn &&
+  redbtn.addEventListener("click", () => {
+    let username = prompt("What's your name?");
+    welcomeUserDiv.style.display = "block";
+    document.querySelector("#welcomeuser").innerHTML = `<p> Hello, ${username}, 
+    looking forward to hearing your playlists! Click this message to close it.</p>`;
+    welcomeUserDiv.style.cursor = "pointer";
+  });
+
+welcomeUserDiv &&
+  welcomeUserDiv.addEventListener("click", (evt) => {
+   // evt.currentTarget.style.display = "none";
     welcomeUserDiv.style.display = "none";
-  }
-}
+  });
 
 const sonatas = {
-  title: 'Beethoven Sonatas',
+  title: "Beethoven Sonatas",
   songs: [
     {
-      title: 'Piano Sonata No. 3',
-      artist: 'Beethoven',
+      title: "Piano Sonata No. 3",
+      artist: "Beethoven",
     },
     {
-      title: 'Piano Sonata No. 7',
-      artist: 'Beethoven',
+      title: "Piano Sonata No. 7",
+      artist: "Beethoven",
     },
     {
-      title: 'Piano Sonata No. 10',
-      artist: 'Beethoven',
+      title: "Piano Sonata No. 10",
+      artist: "Beethoven",
     },
     {
-      title: 'Piano Sonata No. 13',
-      artist: 'Beethoven',
-    }
+      title: "Piano Sonata No. 13",
+      artist: "Beethoven",
+    },
+    {
+      title: "Piano Sonata No. 21",
+      artist: "Beethoven",
+    },
   ],
   getRating() {
-    let userRating = parseInt(prompt("Rate this collection (from 1 to 5 stars)"));
-    if (userRating>5 || userRating<1 || isNaN(userRating)){
+    let userRating = parseInt(
+      prompt("Rate this collection (from 1 to 5 stars)")
+    );
+    if (userRating > 5 || userRating < 1 || isNaN(userRating)) {
       alert("Try again with a number between 1 and 5!");
-    }
-    else{
-      $("#rating").html("You gave a rating of: ");
-      for (let i=0; i < userRating; i++){
-          $("#rating").append("<i class='yellow star icon'></i>");
+    } else {
+      document.querySelector(
+        "#rating"
+      ).innerHTML = `You gave a rating of: <div class="ui star rating" ></div>`;
+      for (let i = 0; i < userRating; i++) {
+        document.querySelector(
+          "#rating"
+        ).innerHTML += `<i class='yellow star icon'></i>`;
       }
     }
-  }
+  },
 };
 
-$(document).ready(function(){
+$(document).ready(function () {
+  $("#tableoutput").html(`<h2 class='ui header'> ${sonatas.title}</h2>`);
+  $("#tableoutput").append(
+    `<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></tr></thead><tbody>`
+  );
 
-  $("#tableoutput").html("<h2 class='ui header'>" + sonatas.title + "</h2>");
-
-  $("#tableoutput").append("<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></thead><tbody>");
-
-  for (let i in sonatas.songs){
-        $("#tableoutput tr:last").after("<tr><td>" + sonatas.songs[i].title + "</td><td>" + sonatas.songs[i].artist + "</td></tr>");
+  for (let thesong of sonatas.songs) {
+    $("#tableoutput tr:last").after(
+      `<tr><td>${thesong.title}</td><td>${thesong.artist}</td></tr>`
+    );
   }
 
-  $("#tableoutput").append("</tbody></table>");
-  
-  $("#tableoutput").append('<p><span id="rating"> </span></p>');
-  
-  $("#tableoutput").append('<button class="ui blue button" onclick="sonatas.getRating()"> Rate it! <i class="star icon"></i></button>');
+  $("#tableoutput").append(`</tbody></table>`);
+  $("#tableoutput").append(`<p><span id="rating"> </span></p>`);
+  $("#tableoutput").append(
+    `<button class="ui blue button" id = "ratingbtn"> Rate it! <i class="star icon"></i></button>`
+  );
 
+  let rbtn = $("#ratingbtn");
+  rbtn.on("click", () => {
+    sonatas.getRating();
+  });
 });
