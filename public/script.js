@@ -74,7 +74,7 @@ const sonatas = {
     } else {
       document.querySelector(
         "#rating"
-      ).innerHTML = `You gave a rating of: <div class="ui star rating" ></div>`;
+      ).innerHTML = `You gave a rating of: `;
       for (let i = 0; i < userRating; i++) {
         document.querySelector(
           "#rating"
