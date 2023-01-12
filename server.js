@@ -2,9 +2,9 @@
 'use strict';
 
 // import all required modules
-const express = require("express");
-const logger = require('./utils/logger');
-const exphbs = require('express-handlebars');
+import express from "express";
+import exphbs from "express-handlebars";
+import logger from "./utils/logger.js";
 
 // initialise project
 const app = express();
@@ -13,15 +13,14 @@ const app = express();
 app.use(express.static("public"));
 
 // use handlebars as view engine
-app.engine('.hbs', exphbs({
-  extname: '.hbs',
-  defaultLayout: 'main',
-}));
-app.set('view engine', '.hbs');
+const handlebars = exphbs.create({ extname: ".hbs" });
+app.engine(".hbs", handlebars.engine);
+app.set("view engine", ".hbs");
 
 // import routes file and use this for routing
-const routes = require('./routes');
-app.use('/', routes);
+import routes from "./routes.js";
+app.use("/", routes);
+
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 4000, function () {
