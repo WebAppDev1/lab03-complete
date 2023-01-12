@@ -1,7 +1,7 @@
 'use strict';
 
 // import all required modules
-const logger = require('../utils/logger');
+import logger from '../utils/logger.js';
 
 // create dashboard object
 const dashboard = {
@@ -23,4 +23,4 @@ const dashboard = {
 };
 
 // export the dashboard module
-module.exports = dashboard;
+export default dashboard;

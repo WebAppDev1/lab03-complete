@@ -1,7 +1,7 @@
 'use strict';
 
 // import all required modules
-const logger = require('../utils/logger');
+import logger from '../utils/logger.js';
 
 // create about object
 const about = {
@@ -23,4 +23,4 @@ const about = {
 };
 
 // export the about module
-module.exports = about;
+export default about;
