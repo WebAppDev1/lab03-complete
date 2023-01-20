@@ -37,7 +37,7 @@ redbtn &&
 
 welcomeUserDiv &&
   welcomeUserDiv.addEventListener("click", (evt) => {
-   // evt.currentTarget.style.display = "none";
+    // evt.currentTarget.style.display = "none";
     welcomeUserDiv.style.display = "none";
   });
 
@@ -84,26 +84,24 @@ const sonatas = {
   },
 };
 
-$(document).ready(function () {
-  $("#tableoutput").html(`<h2 class='ui header'> ${sonatas.title}</h2>`);
-  $("#tableoutput").append(
-    `<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></tr></thead><tbody>`
+$("#tableoutput").html(`<h2 class='ui header'> ${sonatas.title}</h2>`);
+$("#tableoutput").append(
+  `<table class='ui fixed striped table'><thead><tr><th>Song</th><th>Artist</th></tr></thead><tbody>`
+);
+
+for (let thesong of sonatas.songs) {
+  $("#tableoutput tr:last").after(
+    `<tr><td>${thesong.title}</td><td>${thesong.artist}</td></tr>`
   );
+}
 
-  for (let thesong of sonatas.songs) {
-    $("#tableoutput tr:last").after(
-      `<tr><td>${thesong.title}</td><td>${thesong.artist}</td></tr>`
-    );
-  }
+$("#tableoutput").append(`</tbody></table>`);
+$("#tableoutput").append(`<p><span id="rating"> </span></p>`);
+$("#tableoutput").append(
+  `<button class="ui blue button" id = "ratingbtn"> Rate it! <i class="star icon"></i></button>`
+);
 
-  $("#tableoutput").append(`</tbody></table>`);
-  $("#tableoutput").append(`<p><span id="rating"> </span></p>`);
-  $("#tableoutput").append(
-    `<button class="ui blue button" id = "ratingbtn"> Rate it! <i class="star icon"></i></button>`
-  );
-
-  let rbtn = $("#ratingbtn");
-  rbtn.on("click", () => {
-    sonatas.getRating();
-  });
+let rbtn = $("#ratingbtn");
+rbtn.on("click", () => {
+  sonatas.getRating();
 });
