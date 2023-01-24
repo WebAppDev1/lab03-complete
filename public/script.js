@@ -90,7 +90,7 @@ $("#tableoutput").append(
 );
 
 for (let thesong of sonatas.songs) {
-  $("#tableoutput tr:last").after(
+  $("#tableoutput tbody").append(
     `<tr><td>${thesong.title}</td><td>${thesong.artist}</td></tr>`
   );
 }
